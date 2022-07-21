@@ -25,11 +25,13 @@ app.use("/api/products", productRoute);
 app.use("api/checkout", stripeRoute);
 app.use("/api/cart", cartRoute);
 
-app.use(express.static(path.join(__dirname, "/shoe-shop/build")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/shoe-shop/build")));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/shoe-shop/build', 'index.html'));
-});
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "/shoe-shop/build", "index.html"));
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
