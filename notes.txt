@@ -1,0 +1,3 @@
+Add cart filters
+cart functions (adding same product or have different ids for each one in cart)
+Order page
