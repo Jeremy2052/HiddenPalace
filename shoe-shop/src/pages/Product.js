@@ -15,7 +15,13 @@ const Container = styled.div`
   min-height: 100vh;
   min-width: 100vw;
   background: #212531;
-  background: linear-gradient(30deg, #026af1, #026af1 20%, #292929 20.3%, #292929 100%);
+  background: linear-gradient(
+    30deg,
+    #026af1,
+    #026af1 20%,
+    #292929 20.3%,
+    #292929 100%
+  );
   /* position: relative; */
   overflow: hidden;
   ${mobile({})};
@@ -59,7 +65,13 @@ const Desc = styled.div`
   display: flex;
   flex-direction: column;
   /* background: linear-gradient(130deg, #026af1, #026af1 40%, #292929 40.3%, #292929 100%); */
-  background: linear-gradient(130deg, #202020, #424242 40%, #292929 40.3%, #292929 100%);
+  background: linear-gradient(
+    130deg,
+    #202020,
+    #424242 40%,
+    #292929 40.3%,
+    #292929 100%
+  );
   ${mobile({ flex: 2 })};
 `;
 const Title = styled.h1`
@@ -173,6 +185,8 @@ function Product() {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
+  //fetch the product by its unique id and set it to its state to be able to render on to the page
+  //use useEffect to rerender when the id value changes
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -185,19 +199,28 @@ function Product() {
     fetchProduct();
   }, [id]);
 
+  // add product to cart but check if size was chosen if not prompt an error to the page for user
+  // else dispatch the action to add the product to the cart with redux
   const handleClick = () => {
     if (size === "") {
       setError(true);
     } else {
-      dispatch(addProduct({ ...product, quantity, size, pricing: product.price * quantity }));
+      dispatch(
+        addProduct({
+          ...product,
+          quantity,
+          size,
+          pricing: product.price * quantity,
+        })
+      );
       navigate("/cart");
     }
   };
-
+  // change product size state
   const addSize = (s) => {
     setSize(s);
   };
-
+  // change wuantity state
   const adjust = (action) => {
     if (action === "minus") {
       quantity > 1 && setQuantity(quantity - 1);

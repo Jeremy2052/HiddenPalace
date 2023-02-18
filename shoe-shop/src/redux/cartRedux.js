@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//create slice to hold the states, reducers and actions
 const cartSlice = createSlice({
   name: "cart",
   initialState: {

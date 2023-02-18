@@ -11,7 +11,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({ user: userReducer, cart: cartReducer });
-
+//persist the reducers being used to save the states in the application for unique users
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
